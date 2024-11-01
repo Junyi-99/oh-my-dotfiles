@@ -45,7 +45,7 @@ echo "source ~/.oh-my-dotfiles/init.sh" >> ~/.zshrc
 
 3. Setting up SSH configs
 ```sh
-echo "Include ~/.oh-my-dotfiles/etc/ssh/config-*" >> ~/.ssh/config
+echo "Include ~/.oh-my-dotfiles/etc/ssh/*.local" >> ~/.ssh/config
 ```
 
 4. Activate!
