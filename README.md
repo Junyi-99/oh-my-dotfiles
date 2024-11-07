@@ -50,5 +50,5 @@ echo "Include ~/.oh-my-dotfiles/etc/ssh/*.local" >> ~/.ssh/config
 
 4. Activate!
 ```sh
-srouce ~/.zshrc
+source ~/.zshrc
 ```
