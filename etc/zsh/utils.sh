@@ -11,9 +11,7 @@ else
 fi
 
 if command_exists fzf; then
-    # Set up fzf key bindings and fuzzy completion
-    source <(fzf --zsh)
-    echo "\033[32m\033[0;39m  fzf activated"
+    echo "\033[32m\033[0;39m  fzf was found"
 else
     echo "\033[31m\033[0;39m  fzf not found"
 fi
