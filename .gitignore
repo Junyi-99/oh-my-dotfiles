@@ -25,6 +25,8 @@ etc/htop/
 etc/github-copilot/
 etc/gh/
 etc/lazygit/state.yml
+etc/k9s
+etc/crossnote
 
 Desktop.ini
 
