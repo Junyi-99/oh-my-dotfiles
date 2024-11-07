@@ -130,12 +130,9 @@ done
 
 . ${ZDOTDIR}/utils.sh # 加载工具们
 
-
 echo ""
 echo "ZSH is ready for $(hostname) 🚀"
 echo ""
 
 export PATH="/usr/local/go/bin":$PATH
 export PATH="/opt/homebrew/opt/node@20/bin:$PATH"
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

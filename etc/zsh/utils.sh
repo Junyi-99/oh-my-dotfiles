@@ -10,23 +10,12 @@ else
     echo "\033[31m\033[0;39m  spack not found"
 fi
 
-
-if [ -f ~/.local/bin/zoxide ]; then
-    eval "$(zoxide init zsh)"
-    alias cd="z"
-    echo "\033[32m\033[0;39m  zoxide activated"
-else
-    echo "\033[31m\033[0;39m  zoxide not found"
-fi
-
-
 if [ -f ~/.fzf.zsh ]; then
     source ~/.fzf.zsh
     echo "\033[32m\033[0;39m  fzf activated"
 else
     echo "\033[31m\033[0;39m  fzf not found"
 fi
-
 
 if command_exists bat; then
     alias cat="bat -p --theme=ansi"
@@ -54,4 +43,13 @@ if command_exists nvim; then
     echo "\033[32m\033[0;39m  neovim activated"
 else
     echo "\033[31m\033[0;39m  neovim not found"
+fi
+
+# Zoxide must be placed at the end of the zshrc
+if [ -f ~/.local/bin/zoxide ]; then
+    eval "$(zoxide init zsh)"
+    alias cd="z"
+    echo "\033[32m\033[0;39m  zoxide activated"
+else
+    echo "\033[31m\033[0;39m  zoxide not found"
 fi
