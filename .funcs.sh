@@ -90,7 +90,6 @@ function check_dependencies() {
         log_message "Finished installing oh-my-zsh"
     fi
 
-    [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
     if [ ! -d $FZF ]; then
         log_message "fzf not found, installing ..."
         git clone --depth 1 https://github.com/junegunn/fzf.git ${FZF}
