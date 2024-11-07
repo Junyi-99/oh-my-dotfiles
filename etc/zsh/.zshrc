@@ -8,8 +8,6 @@ export PATH=~/.local/bin/:$PATH
 export ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd completion)
 export HISTSILE=10000
 export HISTFILE=$USER_CONFIG_HOME/.history
-export PATH="${USER_BIN_HOME}:${HOME}/.local/bin/:${PATH}"
-export PATH=/Applications/ArmGNUToolchain/13.3.rel1/arm-none-eabi/bin:$PATH
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
@@ -136,3 +134,5 @@ echo ""
 
 export PATH="/usr/local/go/bin":$PATH
 export PATH="/opt/homebrew/opt/node@20/bin:$PATH"
+export PATH="${USER_BIN_HOME}:${HOME}/.local/bin/:${PATH}"
+export PATH=/Applications/ArmGNUToolchain/13.3.rel1/arm-none-eabi/bin:$PATH
