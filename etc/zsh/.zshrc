@@ -133,6 +133,16 @@ echo "ZSH is ready for $(hostname) 🚀"
 echo ""
 
 export PATH="/usr/local/go/bin":$PATH
-export PATH="/opt/homebrew/opt/node@20/bin:$PATH"
+export PATH="/opt/homebrew/opt/node@23/bin:$PATH"
 export PATH="${USER_BIN_HOME}:${HOME}/.local/bin/:${PATH}"
 export PATH=/Applications/ArmGNUToolchain/13.3.rel1/arm-none-eabi/bin:$PATH
+export PATH="/Users/junyi/go/bin":$PATH
+
+
+# pnpm
+export PNPM_HOME="/Users/junyi/.oh-my-dotfiles/data/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
