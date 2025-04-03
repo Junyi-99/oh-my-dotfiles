@@ -3,8 +3,8 @@ function command_exists() {
     command -v "$1" &>/dev/null
 }
 
-if [ -f /home/junyi/spack/share/spack/setup-env.sh ]; then
-    . /home/junyi/spack/share/spack/setup-env.sh
+if [ -f ${HOME}/spack/share/spack/setup-env.sh ]; then
+    . ${HOME}/spack/share/spack/setup-env.sh
     echo "\033[32m\033[0;39m  spack activated"
 else
     echo "\033[31m\033[0;39m  spack not found"
