@@ -65,9 +65,9 @@ fi
 # Homebrew related environment variables ====== END ========
 
 # Check dependencies
-pushd $USER_CONFIG_HOME > /dev/null
+
 check_dependencies
-popd > /dev/null 2>&1
+
 
 print_greetings
 

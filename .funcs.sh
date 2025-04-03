@@ -71,36 +71,19 @@ function print_greetings() {
 }
 
 function check_dependencies() {
+
     # log_message "Checking dependencies ..."
     mkdir -p "${USER_CONFIG_HOME}/tmp" >/dev/null
     
-    export FZF="${USER_CONFIG_HOME}/dep/fzf"
-    export ZOXIDE="${HOME}/.local/bin/zoxide"
     export NVIM="${USER_CONFIG_HOME}/bin/nvim"
     export NODEJS="${USER_CONFIG_HOME}/bin/node"
-    export BATCAT="${USER_CONFIG_HOME}/bin/bat"
-    export DUF="${USER_CONFIG_HOME}/bin/duf"
-
-    if [ ! -d $FZF ]; then
-        log_message "fzf not found, installing ..."
-        git clone --depth 1 https://github.com/junegunn/fzf.git ${FZF}
-        ${FZF}/install --all
-        log_message "Finished installing fzf"
-    fi
-
-    if [ ! -f $ZOXIDE ]; then
-        log_message "zoxide not found, installing ..."
-        curl -sS https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | bash
-        # It will be install at ~/.local/bin
-        log_message "Finished installing zoxide"
-    fi
 
     if [ ! -f $NVIM ] && ! command_exists nvim; then
         # Check system type
         if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-            wget https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz -O tmp/nvim.tar.gz
-            tar -xf tmp/nvim.tar.gz -C tmp/
-            cp -r tmp/nvim-linux64/* ./
+            wget https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz -O ${USER_CONFIG_HOME}/tmp/nvim.tar.gz
+            tar -xf ${USER_CONFIG_HOME}/tmp/nvim.tar.gz -C ${USER_CONFIG_HOME}/tmp
+            cp -r ${USER_CONFIG_HOME}/tmp/nvim-linux-x86_64/* ${USER_CONFIG_HOME}
         elif [[ "$OSTYPE" == "darwin"* ]]; then
             brew install neovim
         else
@@ -110,41 +93,13 @@ function check_dependencies() {
 
     if [ ! -f $NODEJS ] && ! command_exists npm; then
         if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-            wget https://nodejs.org/dist/v22.2.0/node-v22.2.0-linux-x64.tar.xz -O tmp/node.tar.xz
-            tar -xf tmp/node.tar.xz -C tmp/
-            cp -r tmp/node-v22.2.0-linux-x64/* ./
+            wget https://nodejs.org/dist/latest/node-v23.11.0-linux-x64.tar.gz -O ${USER_CONFIG_HOME}/tmp/node.tar.gz
+            tar -xf ${USER_CONFIG_HOME}/tmp/node.tar.gz -C ${USER_CONFIG_HOME}/tmp/
+            cp -r ${USER_CONFIG_HOME}/tmp/node-v23.11.0-linux-x64/* ${USER_CONFIG_HOME}
         elif [[ "$OSTYPE" == "darwin"* ]]; then
             brew install node
         else
             log_message "🚼 Node.JS not found, please install it"
-        fi
-    fi
-
-    if [ ! -f $BATCAT ] && ! command_exists bat && ! command_exists batcat; then
-        if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-            wget https://github.com/sharkdp/bat/releases/download/v0.24.0/bat-v0.24.0-x86_64-unknown-linux-musl.tar.gz -O tmp/bat.tar.gz
-            mkdir -p tmp/bat
-            tar -xf tmp/bat.tar.gz --strip-components 1 -C ./tmp/bat/
-            mv tmp/bat/bat bin/
-            chmod +x bin/bat
-        elif [[ "$OSTYPE" == "darwin"* ]]; then
-            brew install bat
-        else
-            log_message "🚼 bat not found, please install it"
-        fi
-    fi
-
-    if [ ! -f $DUF ] && ! command_exists duf; then
-        if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-            wget https://github.com/muesli/duf/releases/download/v0.8.1/duf_0.8.1_linux_x86_64.tar.gz -O tmp/duf.tar.gz
-            mkdir -p tmp/duf
-            tar -xvf tmp/duf.tar.gz -C tmp/duf/
-            mv tmp/duf/duf bin/
-            chmod +x bin/duf
-        elif [[ "$OSTYPE" == "darwin"* ]]; then
-            brew install duf
-        else
-            log_message "🚼 duf not found, please install it"
         fi
     fi
 }

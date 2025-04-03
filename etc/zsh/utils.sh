@@ -15,6 +15,7 @@ if command_exists fzf; then
     echo "\033[32m\033[0;39m  fzf was found and activated"
 else
     echo "\033[31m\033[0;39m  fzf not found"
+    brew install fzf
 fi
 
 if command_exists bat; then
@@ -26,6 +27,7 @@ else
         echo "\033[32m\033[0;39m  batcat activated"
     else
         echo "\033[31m\033[0;39m  batcat not found"
+        brew install bat
     fi
 fi
 
@@ -35,6 +37,7 @@ if command_exists duf; then
     echo "\033[32m\033[0;39m  duf activated"
 else
     echo "\033[31m\033[0;39m  duf not found"
+    brew install duf
 fi
 
 
@@ -46,10 +49,11 @@ else
 fi
 
 # Zoxide must be placed at the end of the zshrc
-if [ -f ~/.local/bin/zoxide ]; then
+if command_exists zoxide; then
     eval "$(zoxide init zsh)"
     alias cd="z"
     echo "\033[32m\033[0;39m  zoxide activated"
 else
     echo "\033[31m\033[0;39m  zoxide not found"
+    brew install zoxide
 fi
