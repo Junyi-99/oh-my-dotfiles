@@ -14,3 +14,4 @@ mkdir -p "${XDG_CACHE_HOME}" >/dev/null
 
 chmod -R +x $USER_BIN_HOME
 
+export PATH="${USER_BIN_HOME}:${PATH}"

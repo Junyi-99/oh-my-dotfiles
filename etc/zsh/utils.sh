@@ -48,6 +48,13 @@ else
     echo "\033[31m\033[0;39m  neovim not found"
 fi
 
+if command_exists node; then
+    echo "\033[32m\033[0;39m  node.js found"
+else
+    echo "\033[31m\033[0;39m  node.js not found"
+    brew install node
+fi
+
 # Zoxide must be placed at the end of the zshrc
 if command_exists zoxide; then
     eval "$(zoxide init zsh)"
@@ -56,11 +63,4 @@ if command_exists zoxide; then
 else
     echo "\033[31m\033[0;39m  zoxide not found"
     brew install zoxide
-fi
-
-if command_exists node; then
-    echo "\033[32m\033[0;39m  node.js found"
-else
-    echo "\033[31m\033[0;39m  node.js not found"
-    brew install node
 fi

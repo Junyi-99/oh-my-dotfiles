@@ -1,5 +1,87 @@
 # sudo vim /etc/zsh/zshenv
 
+
+export USER_CONFIG_HOME="${HOME}/.oh-my-dotfiles"
+. ${USER_CONFIG_HOME}/.xdg.sh    # The universal config folder re-location
+. ${USER_CONFIG_HOME}/.funcs.sh  # 载入自定义的函数
+
+
+# ZSH related environment variables ========= BEGIN =======
+# export ZDOTDIR="${XDG_CONFIG_HOME}/zsh"
+export ZSH="${USER_DEP_HOME}/oh-my-zsh"
+export ZSH_CUSTOM="${ZSH}/custom"
+
+if [ ! -d $ZSH ]; then
+    log_message "oh-my-zsh not found, installing ..."
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --keep-zshrc --unattended
+    log_message "Finished installing oh-my-zsh"
+fi
+
+if [ ! -d $ZSH_CUSTOM/plugins/zsh-syntax-highlighting ]; then
+    log_message "zsh-syntax-highlighting not found, installing ..."
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
+    log_message "Finished installing zsh-syntax-highlighting"
+fi
+
+if [ ! -d $ZSH_CUSTOM/plugins/zsh-autosuggestions ]; then
+    log_message "zsh-autosuggestions not found, installing ..."
+    git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
+    log_message "Finished installing zsh-autosuggestions"
+fi
+# ZSH related environment variables ======== END ========
+
+
+# Homebrew related environment variables ====== BEGIN ======
+
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+    export HOMEBREW_PREFIX="$USER_DEP_HOME/homebrew"
+    export HOMEBREW_REPOSITORY="$USER_DEP_HOME/homebrew"
+    export HOMEBREW_CELLAR="$HOMEBREW_PREFIX/Cellar"
+    export HOMEBREW_NO_ANALYTICS=1
+
+    export PATH="$HOMEBREW_PREFIX/bin:$PATH"
+    export PATH="$HOMEBREW_PREFIX/sbin:$PATH"
+    export MANPATH="$HOMEBREW_PREFIX/share/man:$MANPATH"
+    export INFOPATH="$HOMEBREW_PREFIX/share/info:$INFOPATH"
+fi
+
+if command_exists brew; then
+    echo "\033[32m\033[0;39m  homebrew installed"
+else
+    log_message "Homebrew not found, please install it first"
+    if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+        mkdir -p $HOMEBREW_PREFIX >/dev/null 2>&1
+        curl -L https://github.com/Homebrew/brew/tarball/master | tar xz --strip 1 -C $HOMEBREW_PREFIX
+    elif [[ "$OSTYPE" == "darwin"* ]]; then
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    else
+        log_message "🚼 homebrew not found, please install it"
+    fi
+fi
+# Homebrew related environment variables ====== END ========
+
+
+export NVIM="${USER_CONFIG_HOME}/bin/nvim"
+if ! command_exists nvim; then
+    # Check system type
+    if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+        mkdir -p "${USER_CONFIG_HOME}/tmp" >/dev/null
+        wget https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz -O ${USER_CONFIG_HOME}/tmp/nvim.tar.gz
+        tar -xf ${USER_CONFIG_HOME}/tmp/nvim.tar.gz -C ${USER_CONFIG_HOME}/tmp
+        cp -r ${USER_CONFIG_HOME}/tmp/nvim-linux-x86_64/* ${USER_CONFIG_HOME}
+    elif [[ "$OSTYPE" == "darwin"* ]]; then
+        brew install neovim
+    else
+        log_message "🚼 nvim not found, please install it"
+    fi
+fi
+
+print_greetings
+
+
+
+
+
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 export PATH=~/.local/bin/:$PATH
@@ -126,14 +208,13 @@ for file in ${XDG_CONFIG_HOME}/completions/*; do
     source $file
 done
 
-. ${ZDOTDIR}/utils.sh # 加载工具们
+. ${USER_CONFIG_HOME}/etc/zsh/utils.sh # 加载工具们
 
 echo ""
 echo "ZSH is ready for $(hostname) 🚀"
 echo ""
 
-export PATH="/usr/local/go/bin":$PATH
-export PATH="/opt/homebrew/opt/node@23/bin:$PATH"
+
 export PATH="${USER_BIN_HOME}:${HOME}/.local/bin/:${PATH}"
 export PATH=/Applications/ArmGNUToolchain/13.3.rel1/arm-none-eabi/bin:$PATH
 

@@ -70,27 +70,6 @@ function print_greetings() {
     fi
 }
 
-function check_dependencies() {
-
-    # log_message "Checking dependencies ..."
-    mkdir -p "${USER_CONFIG_HOME}/tmp" >/dev/null
-    
-    export NVIM="${USER_CONFIG_HOME}/bin/nvim"
-    export NODEJS="${USER_CONFIG_HOME}/bin/node"
-
-    if [ ! -f $NVIM ] && ! command_exists nvim; then
-        # Check system type
-        if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-            wget https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz -O ${USER_CONFIG_HOME}/tmp/nvim.tar.gz
-            tar -xf ${USER_CONFIG_HOME}/tmp/nvim.tar.gz -C ${USER_CONFIG_HOME}/tmp
-            cp -r ${USER_CONFIG_HOME}/tmp/nvim-linux-x86_64/* ${USER_CONFIG_HOME}
-        elif [[ "$OSTYPE" == "darwin"* ]]; then
-            brew install neovim
-        else
-            log_message "🚼 nvim not found, please install it"
-        fi
-    fi
-}
 
 function clicolors() {
     i=1
