@@ -38,6 +38,32 @@ fi
 # ZSH related environment variables ======== END ========
 
 
+# Homebrew related environment variables ====== BEGIN ======
+export HOMEBREW_PREFIX="$USER_DEP_HOME/homebrew"
+export HOMEBREW_REPOSITORY="$USER_DEP_HOME/homebrew"
+export HOMEBREW_CELLAR="$HOMEBREW_PREFIX/Cellar"
+export HOMEBREW_NO_ANALYTICS=1
+
+export PATH="$HOMEBREW_PREFIX/bin:$PATH"
+export PATH="$HOMEBREW_PREFIX/sbin:$PATH"
+export MANPATH="$HOMEBREW_PREFIX/share/man:$MANPATH"
+export INFOPATH="$HOMEBREW_PREFIX/share/info:$INFOPATH"
+
+if command_exists brew; then
+    echo "\033[32m\033[0;39m  homebrew installed"
+else
+    log_message "Homebrew not found, please install it first"
+    if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+        mkdir -p $HOMEBREW_PREFIX >/dev/null 2>&1
+        curl -L https://github.com/Homebrew/brew/tarball/master | tar xz --strip 1 -C $HOMEBREW_PREFIX
+    elif [[ "$OSTYPE" == "darwin"* ]]; then
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    else
+        log_message "🚼 homebrew not found, please install it"
+    fi
+fi
+# Homebrew related environment variables ====== END ========
+
 # Check dependencies
 pushd $USER_CONFIG_HOME > /dev/null
 check_dependencies
