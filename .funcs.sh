@@ -55,6 +55,7 @@ function update_junyi() {
 }
 
 function print_greetings() {
+    export FORTUNE_FILE="${XDG_CONFIG_HOME}/fortunes/ubuntu-server-tips"
     if command -v fortune &>/dev/null; then
         if command -v cowsay &>/dev/null; then
             if command -v lolcat &>/dev/null; then
@@ -72,11 +73,9 @@ function print_greetings() {
 }
 
 function check_dependencies() {
-    log_message "Checking dependencies ..."
-    mkdir -p ${USER_CONFIG_HOME}/tmp
-    export ZDOTDIR="${XDG_CONFIG_HOME}/zsh"
-    export ZSH="${USER_CONFIG_HOME}/dep/oh-my-zsh"
-    export ZSH_CUSTOM="${ZSH}/custom"
+    # log_message "Checking dependencies ..."
+    mkdir -p "${USER_CONFIG_HOME}/tmp" >/dev/null
+    
     export FZF="${USER_CONFIG_HOME}/dep/fzf"
     export ZOXIDE="${HOME}/.local/bin/zoxide"
     export NVIM="${USER_CONFIG_HOME}/bin/nvim"
@@ -84,29 +83,11 @@ function check_dependencies() {
     export BATCAT="${USER_CONFIG_HOME}/bin/bat"
     export DUF="${USER_CONFIG_HOME}/bin/duf"
 
-    if [ ! -d $ZSH ]; then
-        log_message "oh-my-zsh not found, installing ..."
-        sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --keep-zshrc --unattended
-        log_message "Finished installing oh-my-zsh"
-    fi
-
     if [ ! -d $FZF ]; then
         log_message "fzf not found, installing ..."
         git clone --depth 1 https://github.com/junegunn/fzf.git ${FZF}
         ${FZF}/install --all
         log_message "Finished installing fzf"
-    fi
-
-    if [ ! -d $ZSH_CUSTOM/plugins/zsh-syntax-highlighting ]; then
-        log_message "zsh-syntax-highlighting not found, installing ..."
-        git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
-        log_message "Finished installing zsh-syntax-highlighting"
-    fi
-
-    if [ ! -d $ZSH_CUSTOM/plugins/zsh-autosuggestions ]; then
-        log_message "zsh-autosuggestions not found, installing ..."
-        git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
-        log_message "Finished installing zsh-autosuggestions"
     fi
 
     if [ ! -f $ZOXIDE ]; then

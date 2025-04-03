@@ -8,3 +8,7 @@ mkdir -p "${USER_BIN_HOME}" >/dev/null
 mkdir -p "${USER_DEP_HOME}" >/dev/null
 mkdir -p "${XDG_CONFIG_HOME}" >/dev/null
 mkdir -p "${XDG_DATA_HOME}" >/dev/null
+
+
+chmod -R +x $USER_BIN_HOME
+
