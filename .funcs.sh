@@ -90,18 +90,6 @@ function check_dependencies() {
             log_message "🚼 nvim not found, please install it"
         fi
     fi
-
-    if [ ! -f $NODEJS ] && ! command_exists npm; then
-        if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-            wget https://nodejs.org/dist/latest/node-v23.11.0-linux-x64.tar.gz -O ${USER_CONFIG_HOME}/tmp/node.tar.gz
-            tar -xf ${USER_CONFIG_HOME}/tmp/node.tar.gz -C ${USER_CONFIG_HOME}/tmp/
-            cp -r ${USER_CONFIG_HOME}/tmp/node-v23.11.0-linux-x64/* ${USER_CONFIG_HOME}
-        elif [[ "$OSTYPE" == "darwin"* ]]; then
-            brew install node
-        else
-            log_message "🚼 Node.JS not found, please install it"
-        fi
-    fi
 }
 
 function clicolors() {
