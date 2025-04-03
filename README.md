@@ -40,7 +40,7 @@ rm -f ~/.zshrc
 ```sh
 rm -rf ~/.oh-my-dotfiles
 git clone https://github.com/Junyi-99/oh-my-dotfiles.git ~/.oh-my-dotfiles
-echo "source ~/.oh-my-dotfiles/init.sh" >> ~/.zshrc
+echo "source ~/.oh-my-dotfiles/etc/zsh/zshrc" >> ~/.zshrc
 ```
 
 3. Setting up SSH configs
