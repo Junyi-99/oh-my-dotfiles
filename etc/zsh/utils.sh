@@ -11,7 +11,8 @@ else
 fi
 
 if command_exists fzf; then
-    echo "\033[32m\033[0;39m  fzf was found"
+    source <(fzf --zsh)
+    echo "\033[32m\033[0;39m  fzf was found and activated"
 else
     echo "\033[31m\033[0;39m  fzf not found"
 fi
