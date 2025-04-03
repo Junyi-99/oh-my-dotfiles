@@ -37,6 +37,7 @@ if [ ! -d $ZSH_CUSTOM/plugins/zsh-autosuggestions ]; then
 fi
 # ZSH related environment variables ======== END ========
 
+
 # Check dependencies
 pushd $USER_CONFIG_HOME > /dev/null
 check_dependencies

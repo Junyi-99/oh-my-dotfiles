@@ -1,12 +1,10 @@
 #!/bin/bash
 
-# 通用函数：打印带时间戳的日志消息
-log_message() {
+function log_message() {
     local message="$1"
     echo "$(date '+%Y-%m-%d %H:%M:%S') - $message"
 }
 
-# 通用函数：检查命令是否存在
 function command_exists() {
     command -v "$1" &>/dev/null
 }
