@@ -9,6 +9,7 @@ dep/
 data/
 share/
 include/
+cache/
 lib/nvim/*
 lib/node_modules/*
 
