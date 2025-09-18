@@ -87,11 +87,27 @@ if ! command_exists pyenv; then
     fi
 fi
 
+export N_PREFIX="$USER_DEP_HOME/n"
+export PATH="$N_PREFIX/bin:$PATH"
+if ! command_exists n; then
+    if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+        curl -L https://bit.ly/n-install | bash
+    elif [[ "$OSTYPE" == "darwin"* ]]; then
+        brew install n
+    else
+        log_message "🚼 n not found, please install it"
+    fi
+fi
 
+
+if ! command_exists node; then
+    if ! command_exists n; then
+        log_message "🚼 node not found, please install it"
+    else
+        n install lts
+    fi
+fi
 print_greetings
-
-
-
 
 
 # If you come from bash you might have to change your $PATH.
