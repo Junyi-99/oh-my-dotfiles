@@ -68,6 +68,18 @@ if ! command_exists nvim; then
     fi
 fi
 
+
+if ! command_exists pyenv; then
+    if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+        curl https://pyenv.run | bash
+    elif [[ "$OSTYPE" == "darwin"* ]]; then
+        brew install pyenv
+    else
+        log_message "🚼 pyenv not found, please install it"
+    fi
+fi
+
+
 print_greetings
 
 
