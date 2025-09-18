@@ -75,7 +75,8 @@ if ! command_exists nvim; then
     fi
 fi
 
-
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 if ! command_exists pyenv; then
     if [[ "$OSTYPE" == "linux-gnu"* ]]; then
         curl https://pyenv.run | bash
@@ -235,7 +236,5 @@ esac
 
 # source ${HOME}/miniconda3/bin/activate
 
-export PYENV_ROOT="$HOME/.pyenv"
-[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init - zsh)"
 eval "$(pyenv virtualenv-init -)"
