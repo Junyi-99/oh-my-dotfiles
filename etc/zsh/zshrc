@@ -1,11 +1,3 @@
-# sudo vim /etc/zsh/zshenv
-
-
-export USER_CONFIG_HOME="${HOME}/.oh-my-dotfiles"
-. ${USER_CONFIG_HOME}/.xdg.sh    # The universal config folder re-location
-. ${USER_CONFIG_HOME}/.funcs.sh  # 载入自定义的函数
-
-
 # ZSH related environment variables ========= BEGIN =======
 # export ZDOTDIR="${XDG_CONFIG_HOME}/zsh"
 export ZSH="${USER_DEP_HOME}/oh-my-zsh"
@@ -208,17 +200,11 @@ for file in ${XDG_CONFIG_HOME}/completions/*; do
     source $file
 done
 
-. ${USER_CONFIG_HOME}/etc/zsh/utils.sh # 加载工具们
-
 echo ""
 echo "ZSH is ready for $(hostname) 🚀"
 echo ""
 
-
 export PATH="${USER_BIN_HOME}:${HOME}/.local/bin/:${PATH}"
-export PATH=/Applications/ArmGNUToolchain/13.3.rel1/arm-none-eabi/bin:$PATH
-
-
 
 # pnpm
 export PNPM_HOME="${HOME}/.oh-my-dotfiles/data/pnpm"
@@ -228,4 +214,8 @@ case ":$PATH:" in
 esac
 # pnpm end
 
-source ${HOME}/miniconda3/bin/activate
+# source ${HOME}/miniconda3/bin/activate
+
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init - zsh)"

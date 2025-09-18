@@ -40,6 +40,7 @@ rm -f ~/.zshrc
 ```sh
 rm -rf ~/.oh-my-dotfiles
 git clone https://github.com/Junyi-99/oh-my-dotfiles.git ~/.oh-my-dotfiles
+echo "source ~/.oh-my-dotfiles/etc/zsh/zshenv" >> ~/.zshenv
 echo "source ~/.oh-my-dotfiles/etc/zsh/zshrc" >> ~/.zshrc
 ```
 
