@@ -1,5 +1,12 @@
 # ZSH related environment variables ========= BEGIN =======
 # export ZDOTDIR="${XDG_CONFIG_HOME}/zsh"
+
+# check if USER_BIN_HOME is set.
+if [ -z "$USER_BIN_HOME" ]; then
+    log_message "USER_BIN_HOME is not set. Please check be sure you set the ~/.zshenv"
+    exit
+fi
+
 export ZSH="${USER_DEP_HOME}/oh-my-zsh"
 export ZSH_CUSTOM="${ZSH}/custom"
 
@@ -231,3 +238,4 @@ esac
 export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init - zsh)"
+eval "$(pyenv virtualenv-init -)"
